@@ -1,6 +1,6 @@
-# CafeLog
+# Nuxt Nest Template
 
-NestJS + Nuxt.js でのカフェログアプリケーション
+NestJS + Nuxt.js でのフルスタックCRUDテンプレートアプリケーション
 
 ## 🐳 Docker での起動方法
 
@@ -53,7 +53,7 @@ docker-compose down
 ## 🏗️ プロジェクト構成
 
 ```
-cafelog/
+nuxt-nest-template/
 ├── frontend (Nuxt.js)
 │   ├── pages/
 │   ├── components/
