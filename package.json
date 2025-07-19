@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-nest-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@pinia/nuxt": "^0.11.1",
+    "@vee-validate/nuxt": "^4.15.1",
+    "nuxt": "^3.17.6",
+    "pinia": "^3.0.3",
+    "vee-validate": "^4.15.1",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1",
+    "vuetify": "^3.9.0",
+    "vuetify-nuxt-module": "^0.18.7",
+    "yup": "^1.6.1"
+  }
+}

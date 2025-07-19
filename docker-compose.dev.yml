@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # PostgreSQL データベース
+  postgres:
+    image: postgres:15
+    container_name: nuxt_nest_template_postgres_dev
+    environment:
+      POSTGRES_DB: nuxt_nest_template
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    networks:
+      - nuxt_nest_template_dev_network
+
+  # NestJS バックエンド（開発環境）
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: nuxt_nest_template_backend_dev
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=nuxt_nest_template
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=password
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - nuxt_nest_template_dev_network
+
+  # Nuxt.js フロントエンド（開発環境）
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nuxt_nest_template_frontend_dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NUXT_API_BASE_URL=http://localhost:3001
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/backend
+    depends_on:
+      - backend
+    networks:
+      - nuxt_nest_template_dev_network
+
+networks:
+  nuxt_nest_template_dev_network:
+    driver: bridge
+
+volumes:
+  postgres_dev_data:
